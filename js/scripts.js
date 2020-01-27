@@ -33,7 +33,6 @@ function Place(placeName, locale, landmark, timeOfYear, notes){
   this.notes = notes;
 }
 
-
 // User interface logic
 var placeList = new PlaceList();
 
@@ -55,16 +54,19 @@ function showPlace(placeId) {
   $(".notes").html(place.notes);
   var buttons = $("#buttons");
   buttons.empty();
-  }
-
+  buttons.append("<button class='deleteButton' id=" + place.id + ">Hide Detail Info</button>");
+  
+}
   function attachPlaceListners() {
     $("ul#places").on("click", "li", function() {
       console.log(this);
       showPlace(this.id);
+    });  
+    $("#buttons").on("click", ".deleteButton", function() {
+      $("#show-places").hide();
       displayPlaceList(placeList);
     });
   }
-
 $(document).ready(function() {
   attachPlaceListners();
   $("form#inputPlace").submit(function(event){
